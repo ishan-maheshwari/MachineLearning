@@ -44,18 +44,18 @@ y_minus = 1-y;
 J = (-1)/m;
 J = J*((y')*log(h) + (y_minus')*log(h_minus));
 
-theta_square = theta .^2;
+theta(1,1)=0;
+theta_square = (theta')*theta;
 
-for i=2:size(theta)
-    J = J + lambda*theta_square(i,1)/(2*m);
-end
+
+    J = J + (lambda)/(2*m)*theta_square;
+
 
 error = h - y;
 
 grad = (1/m)*(X')*error;
-for i=2:size(theta)
-    grad(i,1) = grad(i,1) + (lambda/m)*theta(i,1);
-end
+
+grad = grad + (lambda/m)*theta;
 
 
 
